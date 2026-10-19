@@ -19,18 +19,38 @@ npm run dev
 npm test
 ```
 
-Проверяется `lib/phone.ts` через `node:test`.
+Проверяются `lib/phone.ts` и дедуп заявок (`lib/dedup.ts`) через `node:test`.
 
 ## Заявки: SQLite и Turso
 
-Заявки хранятся в SQLite через `@libsql/client` (пока не реализовано).
+Заявки сохраняются через `POST /api/lead` в SQLite (`@libsql/client`).
 
-- Локально: `url` = `file:data/leads.db`.
+- Локально: `file:data/leads.db` (каталог `data/` создаётся сам).
 - На публичном сайте: Turso, переменные `TURSO_DATABASE_URL` и `TURSO_AUTH_TOKEN`.
 
 Пример переменных — `.env.example`. Файлы `.env` и `data/*.db` в `.gitignore`.
 
 Почему так: деплой на Vercel, локальный файл там не переживает холодный старт, а форма на живой ссылке обязана сохранять заявку. Vercel — потому что в брифе Next.js плюс.
+
+### Посмотреть заявки локально
+
+После отправки формы:
+
+```bash
+sqlite3 data/leads.db "SELECT id, created_at, name, phone, interest, comment, attribution FROM leads ORDER BY created_at DESC;"
+```
+
+Если `sqlite3` нет — откройте `data/leads.db` в любом SQLite-клиенте.
+
+### Атрибуция
+
+При первой загрузке страницы в `sessionStorage` (ключ `kvarta_attr`) один раз пишется объект с полями:
+
+`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `yclid`, `gclid`, `fbclid`, `referrer`, `landing_path`, `landing_url` (чего нет — `null`).
+
+Форма добавляет `page_url` (адрес в момент отправки). Сервер сохраняет всё вместе в колонку `attribution` как JSON.
+
+Повтор того же нормализованного телефона в течение 10 минут не создаёт вторую строку.
 
 ## Шрифты
 
@@ -52,6 +72,4 @@ Golos Text для текста и полей. Если Golos Text недосту
 
 ## Заполняет человек
 
--
--
--
+проблема с разрешением строки "разовый заказ" не смог исправить.

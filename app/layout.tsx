@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Golos_Text, Source_Serif_4, Unbounded } from "next/font/google";
+import { CaptureAttribution } from "@/components/CaptureAttribution";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ru"
       className={`${unbounded.variable} ${sourceSerif.variable} ${golos.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <CaptureAttribution />
+        {children}
+      </body>
     </html>
   );
 }

@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --test lib/phone.test.ts"
+    "test": "node --experimental-strip-types --test lib/phone.test.ts lib/dedup.test.ts"
   },
   "dependencies": {
+    "@libsql/client": "^0.18.0",
     "next": "16.4.2",
     "react": "19.3.0",
     "react-dom": "19.3.0"

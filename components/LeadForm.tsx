@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { buildLeadAttribution } from "@/lib/attribution";
 import {
   formCopy,
   interestOptions,
@@ -12,6 +13,7 @@ import { submitLead } from "@/lib/submit-lead";
 type FieldErrors = {
   name?: string;
   phone?: string;
+  interest?: string;
   comment?: string;
 };
 
@@ -26,7 +28,7 @@ export function LeadForm({ initialInterest }: Props) {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [successName, setSuccessName] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [failure, setFailure] = useState<string | null>(null);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -60,21 +62,31 @@ export function LeadForm({ initialInterest }: Props) {
       phone: phoneResult.ok ? phoneResult.normalized : phone,
       interest,
       comment: comment.trim(),
+      attribution: buildLeadAttribution(window.location.href),
     });
     setSubmitting(false);
 
     if (result.ok) {
-      setSuccessName(trimmedName);
+      setSuccessMessage(
+        result.duplicate
+          ? formCopy.successDuplicate
+          : formCopy.success(trimmedName),
+      );
+      return;
+    }
+
+    if ("field" in result) {
+      setErrors({ [result.field]: result.message });
       return;
     }
 
     setFailure(formCopy.failure);
   }
 
-  if (successName) {
+  if (successMessage) {
     return (
       <p className="form-status" role="status">
-        {formCopy.success(successName)}
+        {successMessage}
       </p>
     );
   }
@@ -144,6 +156,11 @@ export function LeadForm({ initialInterest }: Props) {
             </label>
           ))}
         </div>
+        {errors.interest ? (
+          <p className="field__error" role="alert">
+            {errors.interest}
+          </p>
+        ) : null}
       </fieldset>
 
       <div className="field">

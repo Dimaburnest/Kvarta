@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
-import { LeadForm } from "@/components/LeadForm";
+import { LeadFormGate } from "@/components/LeadFormGate";
 import { SiteHeader } from "@/components/SiteHeader";
 import {
   brand,
@@ -8,7 +8,6 @@ import {
   footer,
   formatPrice,
   hero,
-  parseInterestParam,
   photos,
   products,
   subscription,
@@ -16,22 +15,7 @@ import {
   week,
 } from "@/lib/content";
 
-type PageProps = {
-  searchParams: Promise<{ interest?: string | string[] }>;
-};
-
-async function LeadSection({
-  searchParams,
-}: {
-  searchParams: Promise<{ interest?: string | string[] }>;
-}) {
-  const params = await searchParams;
-  const initialInterest = parseInterestParam(params.interest);
-
-  return <LeadForm initialInterest={initialInterest} />;
-}
-
-export default function Home({ searchParams }: PageProps) {
+export default function Home() {
   return (
     <>
       <SiteHeader />
@@ -155,8 +139,8 @@ export default function Home({ searchParams }: PageProps) {
           <h2 id="form-title" className="section-title">
             Заявка
           </h2>
-          <Suspense fallback={<p>Загружаем форму…</p>}>
-            <LeadSection searchParams={searchParams} />
+          <Suspense fallback={null}>
+            <LeadFormGate />
           </Suspense>
         </section>
       </main>
