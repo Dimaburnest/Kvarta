@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Кварта
 
-## Getting Started
+Лендинг обжарки «Кварта» в Минске. Цель — заявка на подписку или разовый заказ. Корзины, оплаты, личного кабинета и блога нет.
 
-First, run the development server:
+Клиент вымышленный. Факты — только в `docs/brief.md`. Визуальные решения — в `docs/design.md`.
+
+## Запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открыть [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Заявки: SQLite и Turso
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Заявки хранятся в SQLite через `@libsql/client` (пока не реализовано).
 
-## Learn More
+- Локально: `url` = `file:data/leads.db`.
+- На публичном сайте: Turso, переменные `TURSO_DATABASE_URL` и `TURSO_AUTH_TOKEN`.
 
-To learn more about Next.js, take a look at the following resources:
+Пример переменных — `.env.example`. Файлы `.env` и `data/*.db` в `.gitignore`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Почему так: деплой на Vercel, локальный файл там не переживает холодный старт, а форма на живой ссылке обязана сохранять заявку. Vercel — потому что в брифе Next.js плюс.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Шрифты
 
-## Deploy on Vercel
+Golos Text для текста и полей. Если Golos Text недоступен в `next/font` — Manrope.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Допущение
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Менеджер перезвонит и оформит заказ. Онлайн-оплаты на сайте нет.
+
+## Заполняет человек
+
+-
+-
+-
