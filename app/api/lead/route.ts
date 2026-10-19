@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { findDuplicateLeadId } from "@/lib/dedup";
 import { getDb } from "@/lib/db";
 import { validateLeadFields } from "@/lib/lead-validate";
+import { notifyTelegramNewLead } from "@/lib/telegram";
 
 // Node.js runtime: route uses node:fs / node:crypto via lib/db (не edge).
 // `export const runtime` несовместим с cacheComponents в Next 16.
@@ -96,6 +97,14 @@ export async function POST(request: Request) {
         comment,
         attributionJson,
       ],
+    });
+
+    await notifyTelegramNewLead({
+      name: validated.name,
+      phone: validated.phone,
+      interest: validated.interest,
+      comment,
+      attributionJson,
     });
 
     return Response.json({

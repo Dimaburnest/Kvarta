@@ -4,7 +4,11 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="sheet site-header__inner">
-        <a href="#top" className="stamp" style={{ textDecoration: "none" }}>
+        <a
+          href="#top"
+          className="stamp stamp-press"
+          style={{ textDecoration: "none" }}
+        >
           {brand.name}
         </a>
         <span className="site-header__city">{brand.city}</span>

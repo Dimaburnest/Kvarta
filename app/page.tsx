@@ -21,7 +21,7 @@ export default function Home() {
       <SiteHeader />
       <main id="top" className="sheet site-main">
         <section className="site-section" aria-labelledby="hero-title">
-          <h1 id="hero-title" className="hero-title">
+          <h1 id="hero-title" className="hero-title stamp-press">
             {hero.title}
           </h1>
           <p style={{ fontSize: "1.15rem", margin: "0 0 0.75rem" }}>

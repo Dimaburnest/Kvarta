@@ -45,6 +45,33 @@ a {
   letter-spacing: 0.02em;
 }
 
+@keyframes stamp-press {
+  from {
+    transform: rotate(-9deg) scale(1.06);
+    opacity: 0.7;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.stamp-press {
+  display: inline-block;
+  transform-origin: 30% 60%;
+  animation: stamp-press 320ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-press {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .section-title {
   font-family: var(--font-source-serif), Georgia, serif;
   font-weight: 600;
@@ -99,6 +126,13 @@ a {
   }
 }
 
+.site-header__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.25rem 0;
+}
+
 .hero-title {
   font-family: var(--font-unbounded), system-ui, sans-serif;
   color: var(--roast);
@@ -115,8 +149,12 @@ a {
 }
 
 .cta-row a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
   text-align: center;
   padding: 0.85rem 1rem;
   border: 1px solid var(--line);
@@ -248,11 +286,14 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 44px;
   font-size: 1rem;
 }
 
 .btn-submit {
   width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
   font: inherit;
   font-size: 1rem;
   padding: 0.9rem 1rem;

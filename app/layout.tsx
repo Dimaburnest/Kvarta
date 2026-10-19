@@ -21,10 +21,24 @@ const golos = Golos_Text({
   variable: "--font-golos",
 });
 
+const siteTitle = "Кварта — свежая обжарка, Минск";
+const siteDescription =
+  "Обжариваем в четверг — зерно у вас на 1–3 день; доставка по Минску и самовывоз на Короля, 9.";
+
 export const metadata: Metadata = {
-  title: "Кварта — обжарка в Минске",
-  description:
-    "Обжариваем в четверг. В пятницу зерно уже у вас. Заявка на подписку или разовый заказ.",
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    locale: "ru_BY",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

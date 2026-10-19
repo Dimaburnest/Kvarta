@@ -2,22 +2,6 @@
 
 Лендинг обжарки «Кварта» в Минске. Цель — заявка на подписку или разовый заказ. Корзины, оплаты, личного кабинета и блога нет.
 
-Клиент вымышленный. Факты — только в `docs/brief.md`. Визуальные решения — в `docs/design.md`.
-
-## Запуск
-
-```bash
-npm install
-npm run dev
-```
-
-Открыть [http://localhost:3000](http://localhost:3000).
-
-## Тесты
-
-```bash
-npm test
-```
 
 Проверяются `lib/phone.ts` и дедуп заявок (`lib/dedup.ts`) через `node:test`.
 
@@ -52,6 +36,8 @@ sqlite3 data/leads.db "SELECT id, created_at, name, phone, interest, comment, at
 
 Повтор того же нормализованного телефона в течение 10 минут не создаёт вторую строку.
 
+Дубль в Telegram выключен, пока не заданы `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`.
+
 ## Шрифты
 
 Golos Text для текста и полей. Если Golos Text недоступен в `next/font` — Manrope.
@@ -66,10 +52,7 @@ Golos Text для текста и полей. Если Golos Text недосту
 | `public/photos/upakovka.jpg` | Haberdoedas | Bags of coffee beans on shelves | https://unsplash.com/photos/bags-of-coffee-beans-on-shelves-qvRafRg5S2k |
 | `public/photos/vhod.jpg` | Drew Anderson | Exterior of building with cafe | https://www.pexels.com/photo/exterior-of-building-with-cafe-5603558/ |
 
-## Допущение
-
-Менеджер перезвонит и оформит заказ. Онлайн-оплаты на сайте нет.
-
-## Заполняет человек
+## заметки
 
 проблема с разрешением строки "разовый заказ" не смог исправить.
+в основе всё сделал ИИ, больше проблем не увидел.
