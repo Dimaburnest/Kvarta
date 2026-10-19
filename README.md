@@ -13,6 +13,14 @@ npm run dev
 
 Открыть [http://localhost:3000](http://localhost:3000).
 
+## Тесты
+
+```bash
+npm test
+```
+
+Проверяется `lib/phone.ts` через `node:test`.
+
 ## Заявки: SQLite и Turso
 
 Заявки хранятся в SQLite через `@libsql/client` (пока не реализовано).
@@ -27,6 +35,16 @@ npm run dev
 ## Шрифты
 
 Golos Text для текста и полей. Если Golos Text недоступен в `next/font` — Manrope.
+
+## Фото
+
+Лицензия Unsplash / Pexels (свободное использование). Лиц нет. Не претендуем, что кадр — ул. Короля, 9.
+
+| Файл | Автор | Название | URL |
+|------|-------|----------|-----|
+| `public/photos/zerno.jpg` | Mike Kenneally | Coffee bean lot | https://unsplash.com/photos/coffee-bean-lot-TD4DBagg2wE |
+| `public/photos/upakovka.jpg` | Haberdoedas | Bags of coffee beans on shelves | https://unsplash.com/photos/bags-of-coffee-beans-on-shelves-qvRafRg5S2k |
+| `public/photos/vhod.jpg` | Drew Anderson | Exterior of building with cafe | https://www.pexels.com/photo/exterior-of-building-with-cafe-5603558/ |
 
 ## Допущение
 
